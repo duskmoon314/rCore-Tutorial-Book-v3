@@ -1,0 +1,393 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>引言 &mdash; rCore-Tutorial-Book-v3 0.1 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/my_style.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "rcore-os/rCore-Tutorial-Book-v3");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "comments");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="应用程序执行环境与平台支持" href="1app-ee-platform.html" />
+    <link rel="prev" title="第一章：应用程序与基本执行环境" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> rCore-Tutorial-Book-v3
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Part1 - Just do it!</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../chapter0/index.html">第零章：操作系统概述</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">第一章：应用程序与基本执行环境</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">引言</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">本章导读</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">实践体验</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">本章代码树</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">本章代码导读</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="1app-ee-platform.html">应用程序执行环境与平台支持</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2remove-std.html">移除标准库依赖</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-1-mini-rt-usrland.html">构建用户态执行环境</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-2-mini-rt-baremetal.html">构建裸机运行时执行环境</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4understand-prog.html">理解应用程序和执行环境</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5exercise.html">chapter1练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter2/index.html">第二章：批处理系统</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter3/index.html">第三章：多道程序与分时多任务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter4/index.html">第四章：地址空间</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter5/index.html">第五章：进程及进程管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter6/index.html">第六章：进程间通信</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter7/index.html">第七章：文件系统与I/O重定向</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter8/index.html">第八章：I/O设备管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab8.html">chapter8练习</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">附录</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-a/index.html">附录 A：Rust 系统编程入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-b/index.html">附录 B：常见工具的使用方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-c/index.html">附录 C：深入机器模式：RustSBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-d/index.html">附录 D：RISC-V相关信息</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../terminology.html">术语中英文对照表</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">开发注记</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup-sphinx.html">修改和构建本项目</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rest-example.html">reStructuredText 基本语法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../log.html">更新日志</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">rCore-Tutorial-Book-v3</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">第一章：应用程序与基本执行环境</a> &raquo;</li>
+        
+      <li>引言</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/chapter1/0intro.rst.txt" rel="nofollow"> 查看页面源码</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>引言<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id2">
+<h2>本章导读<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>本章展现了操作系统一个功能：让应用与硬件隔离，简化了应用访问硬件的难度和复杂性。</p>
+<p>大多数程序员的第一行代码都从 <code class="docutils literal notranslate"><span class="pre">Hello,</span> <span class="pre">world!</span></code> 开始，当我们满怀着好奇心在编辑器内键入仅仅数个字节，再经过几行命令编译（靠的是编译器）、运行（靠的是操作系统），终于在黑洞洞的终端窗口中看到期望中的结果的时候，一扇通往编程世界的大门已经打开。在本章第一节 <a class="reference internal" href="1app-ee-platform.html"><span class="doc">应用程序执行环境与平台支持</span></a> 中，可以看到用Rust语言编写的非常简单的“Hello, world”应用程序。</p>
+<p>不过我们能够隐约意识到编程工作能够如此方便简洁并不是理所当然的，实际上有着多层硬件和软件工具和支撑环境隐藏在它背后，才让我们不必付出那么多努力就能够创造出功能强大的应用程序。生成应用程序二进制执行代码所依赖的是以 <strong>编译器</strong> 为主的开发环境；运行应用程序执行码所依赖的是以 <strong>操作系统</strong> 为主的执行环境。</p>
+<p>本章主要是设计和实现建立在裸机上的执行环境，从中对应用程序和它所依赖的执行环境有一个全面和深入的理解。</p>
+<p>本章我们的目标仍然只是输出 <code class="docutils literal notranslate"><span class="pre">Hello,</span> <span class="pre">world!</span></code> ，但这一次，我们将离开舒适区，基于一个几乎空无一物的平台从零开始搭建我们自己的高楼大厦，而不是仅仅通过一行语句就完成任务。所以，在接下来的内容中，我们将描述如何让 <code class="docutils literal notranslate"><span class="pre">Hello,</span> <span class="pre">world!</span></code> 应用程序逐步脱离对编译器、运行时和操作系统的现有复杂依赖，最终以最小的依赖需求能在裸机上运行。这时，我们也可把这个能在裸机上运行的 <code class="docutils literal notranslate"><span class="pre">Hello,</span> <span class="pre">world!</span></code> 应用程序称为一种支持输出字符串的非常初级的寒武纪“三叶虫”操作系统，它其实就是一个给应用提供各种服务（比如输出字符串）的库，方便了单一应用程序在裸机上的开发与运行。输出字符串功能好比是三叶虫的眼睛，有了它，我们就有了最基本的调试功能，即通过在代码中的不同位置插入特定内容的输出语句来实现对程序运行的调试。</p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>在操作系统发展历史上，在1956年就诞生了操作系统GM-NAA I/O，并且被实际投入使用，它的一个主要任务就是”自动加载运行一个接一个的程序”。</p>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>实践体验<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>本章设计实现了一个支持显示字符串应用的简单操作系统–“三叶虫”操作系统。</p>
+<p>获取本章代码：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git clone https://github.com/rcore-os/rCore-Tutorial-v3.git
+<span class="gp">$ </span><span class="nb">cd</span> rCore-Tutorial-v3
+<span class="gp">$ </span>git checkout ch1
+</pre></div>
+</div>
+<p>在 qemu 模拟器上运行本章代码，看看一个小应用程序是如何在QEMU模拟的计算机上运行的：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span> os
+<span class="gp">$ </span>make run
+</pre></div>
+</div>
+<p>将 Maix 系列开发板连接到 PC，并在上面运行本章代码，看看一个小应用程序是如何在真实计算机上运行的：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span> os
+<span class="gp">$ </span>make run <span class="nv">BOARD</span><span class="o">=</span>k210
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p><strong>FIXME: 提供 wsl/macOS 等更多平台支持</strong></p>
+</div>
+<p>如果顺利的话，以 qemu 平台为例，将输出：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[rustsbi] RustSBI version 0.1.1
+.______       __    __      _______.___________.  _______..______   __
+|   _  \     |  |  |  |    /       |           | /       ||   _  \ |  |
+|  |_)  |    |  |  |  |   |   (----`---|  |----`|   (----`|  |_)  ||  |
+|      /     |  |  |  |    \   \       |  |      \   \    |   _  &lt; |  |
+|  |\  \----.|  `--&#39;  |.----)   |      |  |  .----)   |   |  |_)  ||  |
+| _| `._____| \______/ |_______/       |__|  |_______/    |______/ |__|
+
+[rustsbi] Platform: QEMU (Version 0.1.0)
+[rustsbi] misa: RV64ACDFIMSU
+[rustsbi] mideleg: 0x222
+[rustsbi] medeleg: 0xb1ab
+[rustsbi-dtb] Hart count: cluster0 with 1 cores
+[rustsbi] Kernel entry: 0x80200000
+Hello, world!
+.text [0x80200000, 0x80202000)
+.rodata [0x80202000, 0x80203000)
+.data [0x80203000, 0x80203000)
+boot_stack [0x80203000, 0x80213000)
+.bss [0x80213000, 0x80213000)
+Panicked at src/main.rs:46 Shutdown machine!
+</pre></div>
+</div>
+<p>除了 <code class="docutils literal notranslate"><span class="pre">Hello,</span> <span class="pre">world!</span></code> 之外还有一些额外的信息，最后关机。</p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>RustSBI是啥？</p>
+<p>戳 <a class="reference internal" href="../appendix-c/index.html"><span class="doc">附录 C：深入机器模式：RustSBI</span></a> 可以进一步了解RustSBI。</p>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>本章代码树<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>./os/src
+Rust        4 Files   118 Lines
+Assembly    1 Files    11 Lines
+
+├── bootloader(内核依赖的运行在 M 特权级的 SBI 实现，本项目中我们使用 RustSBI)
+│   ├── rustsbi-k210.bin(可运行在 k210 真实硬件平台上的预编译二进制版本)
+│   └── rustsbi-qemu.bin(可运行在 qemu 虚拟机上的预编译二进制版本)
+├── LICENSE
+├── os(我们的内核实现放在 os 目录下)
+│   ├── Cargo.toml(内核实现的一些配置文件)
+│   ├── Makefile
+│   └── src(所有内核的源代码放在 os/src 目录下)
+│       ├── console.rs(将打印字符的 SBI 接口进一步封装实现更加强大的格式化输出)
+│       ├── entry.asm(设置内核执行环境的的一段汇编代码)
+│       ├── lang_items.rs(需要我们提供给 Rust 编译器的一些语义项，目前包含内核 panic 时的处理逻辑)
+│       ├── linker-k210.ld(控制内核内存布局的链接脚本以使内核运行在 k210 真实硬件平台上)
+│       ├── linker-qemu.ld(控制内核内存布局的链接脚本以使内核运行在 qemu 虚拟机上)
+│       ├── main.rs(内核主函数)
+│       └── sbi.rs(调用底层 SBI 实现提供的 SBI 接口)
+├── README.md
+├── rust-toolchain(控制整个项目的工具链版本)
+└── tools(自动下载的将内核烧写到 k210 开发板上的工具)
+   ├── kflash.py
+   ├── LICENSE
+   ├── package.json
+   ├── README.rst
+   └── setup.py
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>本章代码导读<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<p>操作系统虽然是软件，但它不是常规的应用软件，需要运行在没有操作系统的裸机环境中。如果采用通常编程方法和编译手段，无法开发出操作系统。其中一个重要的原因编译器编译出的应用软件在缺省情况下是要链接标准库（Rust编译器和C编译器都是这样的），而标准库是依赖于操作系统（如Linux、Windows等）的。所以，本章主要是让读者能够脱离常规应用软件开发的思路，理解如何开发没有操作系统支持的操作系统内核。</p>
+<p>为了做到这一步，首先需要写出不需要标准库的软件并通过编译。为此，先把一般应用所需要的标准库的组件给去掉，这会导致编译失败。然后在逐步添加不需要操作系统的极少的运行时支持代码，让编译器能够正常编译出不需要标准库的正常程序。但此时的程序没有显示输出，更没有输入等，但可以正常通过编译，这样就为进一步扩展程序内容打下了一个 <strong>可正常编译OS</strong> 的前期基础。具体可看 <a class="reference internal" href="2remove-std.html#term-remove-std"><span class="std std-ref">移除标准库依赖</span></a> 一节的内容。</p>
+<p>由于操作系统代码无法象应用软件那样，可以有方便的调试（Debug）功能。这是因为应用之所以能够被调试，也是由于操作系统提供了方便的调试相关的系统调用。而我们不得不再次认识到，需要运行在没有操作系统的裸机环境中，当然没法采用依赖操作系统的传统调试方法了。所以，我们只能采用 <code class="docutils literal notranslate"><span class="pre">print</span></code> 这种原始且有效的调试方法。这样，第二步就是让脱离了标准库的软件有输出，这样，我们就能看到程序的运行情况了。为了简单起见，我们可以先在用户态尝试构建没有标准库的支持显示输出的最小运行时执行环境，比较特别的地方在于如何写内嵌汇编完成简单的系统调用。具体可看 <a class="reference internal" href="3-1-mini-rt-usrland.html#term-print-userminienv"><span class="std std-ref">构建用户态执行环境</span></a> 一节的内容。</p>
+<p>接下来就是尝试构建可在裸机上支持显示的最小运行时执行环境。相对于用户态执行环境，读者需要能够做更多的事情，比如如何关机，如何配置软件运行所在的物理内存空间，特别是栈空间，如何清除 <code class="docutils literal notranslate"><span class="pre">bss</span></code> 段，如何通过 <code class="docutils literal notranslate"><span class="pre">RustSBI</span></code> 的 <code class="docutils literal notranslate"><span class="pre">SBI_CONSOLE_PUTCHAR</span></code> 接口简洁地实现的信息输出。这里比较特别的地方是需要了解 <code class="docutils literal notranslate"><span class="pre">linker.ld</span></code> 文件中对OS的代码和数据所在地址空间布局的描述，以及基于RISC-V 64的汇编代码 <code class="docutils literal notranslate"><span class="pre">entry.asm</span></code> 如何进行栈的设置和初始化，以及如何跳转到Rust语言编写 <code class="docutils literal notranslate"><span class="pre">rust_main</span></code> 主函数中，并开始内核最小运行时执行环境的运行。具体可看 <a class="reference internal" href="3-2-mini-rt-baremetal.html#term-print-kernelminienv"><span class="std std-ref">构建裸机执行环境</span></a> 一节的内容。</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="1app-ee-platform.html" class="btn btn-neutral float-right" title="应用程序执行环境与平台支持" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="第一章：应用程序与基本执行环境" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; 版权所有 2020, Yifan Wu.
+
+    </p>
+  </div>
+    
+    
+    
+    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
