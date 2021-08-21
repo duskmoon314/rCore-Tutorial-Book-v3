@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
   <link rel="stylesheet" href="../_static/my_style.css" type="text/css" />
 
   
@@ -70,6 +71,7 @@ var addUtterances = () => {
 }
 commentsRunWhenDOMLoaded(addUtterances);
 </script>
+        <script src="../_static/tabs.js"></script>
         <script src="../_static/translations.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -251,11 +253,16 @@ commentsRunWhenDOMLoaded(addUtterances);
 <h2>实践体验<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
 <p>本章设计实现了一个支持显示字符串应用的简单操作系统–“三叶虫”操作系统。</p>
 <p>获取本章代码：</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git clone https://github.com/rcore-os/rCore-Tutorial-v3.git
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-ckNvcmU=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-ckNvcmU=" name="ckNvcmU=" role="tab" tabindex="0">rCore</button><button aria-controls="panel-0-dUNvcmU=" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-dUNvcmU=" name="dUNvcmU=" role="tab" tabindex="-1">uCore</button></div><div aria-labelledby="tab-0-ckNvcmU=" class="sphinx-tabs-panel group-tab" id="panel-0-ckNvcmU=" name="ckNvcmU=" role="tabpanel" tabindex="0"><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git clone https://github.com/rcore-os/rCore-Tutorial-v3.git
 <span class="gp">$ </span><span class="nb">cd</span> rCore-Tutorial-v3
 <span class="gp">$ </span>git checkout ch1
 </pre></div>
 </div>
+</div><div aria-labelledby="tab-0-dUNvcmU=" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-dUNvcmU=" name="dUNvcmU=" role="tabpanel" tabindex="0"><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&lt;TODO&gt;</span>
+</pre></div>
+</div>
+</div></div>
 <p>在 qemu 模拟器上运行本章代码，看看一个小应用程序是如何在QEMU模拟的计算机上运行的：</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span> os
 <span class="gp">$ </span>make run
@@ -271,7 +278,8 @@ commentsRunWhenDOMLoaded(addUtterances);
 <p><strong>FIXME: 提供 wsl/macOS 等更多平台支持</strong></p>
 </div>
 <p>如果顺利的话，以 qemu 平台为例，将输出：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[rustsbi] RustSBI version 0.1.1
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-ckNvcmU=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-1-ckNvcmU=" name="ckNvcmU=" role="tab" tabindex="0">rCore</button></div><div aria-labelledby="tab-1-ckNvcmU=" class="sphinx-tabs-panel group-tab" id="panel-1-ckNvcmU=" name="ckNvcmU=" role="tabpanel" tabindex="0"><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[rustsbi] RustSBI version 0.1.1
 .______       __    __      _______.___________.  _______..______   __
 |   _  \     |  |  |  |    /       |           | /       ||   _  \ |  |
 |  |_)  |    |  |  |  |   |   (----`---|  |----`|   (----`|  |_)  ||  |
@@ -294,6 +302,7 @@ boot_stack [0x80203000, 0x80213000)
 Panicked at src/main.rs:46 Shutdown machine!
 </pre></div>
 </div>
+</div></div>
 <p>除了 <code class="docutils literal notranslate"><span class="pre">Hello,</span> <span class="pre">world!</span></code> 之外还有一些额外的信息，最后关机。</p>
 <div class="admonition note">
 <p class="admonition-title">注解</p>
@@ -303,7 +312,8 @@ Panicked at src/main.rs:46 Shutdown machine!
 </div>
 <div class="section" id="id4">
 <h2>本章代码树<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>./os/src
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-2-ckNvcmU=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-2-ckNvcmU=" name="ckNvcmU=" role="tab" tabindex="0">rCore</button></div><div aria-labelledby="tab-2-ckNvcmU=" class="sphinx-tabs-panel group-tab" id="panel-2-ckNvcmU=" name="ckNvcmU=" role="tabpanel" tabindex="0"><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>./os/src
 Rust        4 Files   118 Lines
 Assembly    1 Files    11 Lines
 
@@ -332,6 +342,7 @@ Assembly    1 Files    11 Lines
    └── setup.py
 </pre></div>
 </div>
+</div></div>
 </div>
 <div class="section" id="id5">
 <h2>本章代码导读<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
