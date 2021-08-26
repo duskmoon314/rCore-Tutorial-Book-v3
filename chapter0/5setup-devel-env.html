@@ -129,7 +129,7 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">第零章：操作系统概述</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="0intro.html">为何要写这本操作系统书</a></li>
 <li class="toctree-l2"><a class="reference internal" href="1what-is-os.html">什么是操作系统</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2os-interface.html">操作系统的接口</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2os-interface.html">操作系统的系统调用接口</a></li>
 <li class="toctree-l2"><a class="reference internal" href="3os-hw-abstract.html">操作系统抽象</a></li>
 <li class="toctree-l2"><a class="reference internal" href="4os-features.html">操作系统的特征</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">实验环境配置</a><ul>
@@ -254,8 +254,8 @@ commentsRunWhenDOMLoaded(addUtterances);
 </ul>
 <div class="section" id="id2">
 <h2>系统环境配置<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
-<p>目前实验仅支持 Ubuntu18.04 + 操作系统。对于 Windows10 和 macOS 上的用户，可以使用 VMware 或
-VirtualBox 安装一台 Ubuntu18.04 虚拟机并在上面进行实验。</p>
+<p>目前实验仅支持 Ubuntu18.04 / 20.04 + 操作系统。对于 Windows10 和 macOS 上的用户，可以使用 VMware 或
+VirtualBox 安装一台 Ubuntu18.04 / 20.04 虚拟机并在上面进行实验。</p>
 <p>特别的，Windows10 的用户可以通过系统内置的 WSL2 虚拟机（请不要使用 WSL1）来安装 Ubuntu 18.04 / 20.04 。
 步骤如下：</p>
 <ul>
@@ -301,7 +301,7 @@ Visual Studio Code，能够更容易完成实验并撰写实验报告。</p>
 </ol>
 </div>
 <p>你也可以在 Windows10 或 macOS 原生系统或者其他 Linux 发行版上进行实验，基本上不会出现太大的问题。不过由于
-时间问题我们只在 Ubuntu18.04 上进行了测试，后面的配置也都是基于它的。如果遇到了问题的话，请在本节的讨论区
+时间问题我们主要在 Ubuntu18.04 上进行了测试，后面的配置也都是基于它的。如果遇到了问题的话，请在本节的讨论区
 中留言，我们会尽量帮助解决。</p>
 </div>
 <div class="section" id="rust">
@@ -480,7 +480,7 @@ sudo apt install python-serial
 并在 <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">sdcard</span></code> 之前对 <code class="docutils literal notranslate"><span class="pre">os/Makefile</span></code> 的 <code class="docutils literal notranslate"><span class="pre">SDCARD</span></code> 配置做出适当的修改。不然，这有可能导致 <strong>设备 /dev/sdb 上数据丢失</strong>！</p>
 </div>
 <p>随后，我们将 MicroSD 插入 K210 开发板，将 K210 开发板连接到 PC ，然后进入 <code class="docutils literal notranslate"><span class="pre">os</span></code> 目录 <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span> <span class="pre">BOARD=k210</span></code>
-在 K210 开发板上跑 Tutorial 。</p>
+在 K210 开发板上跑 rCore Tutorial 。</p>
 <img alt="../_images/k210-final.gif" src="../_images/k210-final.gif" />
 <p>之后，可以按下 <code class="docutils literal notranslate"><span class="pre">Ctrl+]</span></code> 来退出串口终端。</p>
 <p>到这里，恭喜你完成了实验环境的配置，可以开始阅读教程的正文部分了！</p>

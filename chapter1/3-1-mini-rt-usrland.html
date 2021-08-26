@@ -133,9 +133,13 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li class="toctree-l2"><a class="reference internal" href="2remove-std.html">移除标准库依赖</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">构建用户态执行环境</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id2">本节导读</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">用户态最小化执行环境</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">有显示支持的用户态执行环境</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id5">实现输出字符串的相关函数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">用户态最小化执行环境</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">执行环境初始化</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">程序正常退出</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">有显示支持的用户态执行环境</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id8">实现输出字符串的相关函数</a></li>
 </ul>
 </li>
 </ul>
@@ -242,14 +246,16 @@ commentsRunWhenDOMLoaded(addUtterances);
 </div>
 <div class="section" id="id2">
 <h2>本节导读<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
-<p>本节开始我们将着手自己来实现之前被我们移除的 <code class="docutils literal notranslate"><span class="pre">Hello,</span> <span class="pre">world!</span></code> 程序中执行环境的功能。
-在这一小节，我们介绍如何进行 <strong>执行环境初始化</strong> 。</p>
-<p>在这里，我们先设计实现一个最小执行环境以支持最简单的用户态 <code class="docutils literal notranslate"><span class="pre">Hello,</span> <span class="pre">world!</span></code> 程序，再改进这个最小执行环境，支持对裸机应用程序。这样设计实现的原因是，
+<p>在这里，我们先设计实现一个用户态的最小执行环境（就是上节提到的用户态的LibOS）以支持最简单的用户态 <code class="docutils literal notranslate"><span class="pre">Hello,</span> <span class="pre">world!</span></code> 程序，再改进这个最小执行环境，让它能在内核态运行（即可以在裸机上运行的嵌入式OS），支持裸机应用程序。这样设计实现的原因是，
 它能帮助我们理解这两个不同的执行环境在支持同样一个应用程序时的的相同和不同之处，这将加深对执行环境的理解，并对后续写自己的OS和运行在OS上的应用程序都有帮助。
-所以，本节将先建立一个用户态的最小执行环境，即 <strong>恐龙虾</strong> 操作系统。</p>
+所以，本节将先建立一个用户态的最小执行环境，即 <strong>恐龙虾</strong> 操作系统 <a class="footnote-reference brackets" href="#shrimp" id="id3">1</a> 。</p>
+<p>本节开始我们将着手自己来实现之前被我们移除的 <code class="docutils literal notranslate"><span class="pre">Hello,</span> <span class="pre">world!</span></code> 程序中用户态执行环境的功能。
+在这一小节，我们首先介绍如何进行 <strong>执行环境初始化</strong> 。</p>
 </div>
-<div class="section" id="id3">
-<h2>用户态最小化执行环境<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id4">
+<h2>用户态最小化执行环境<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id5">
+<h3>执行环境初始化<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
 <p>在上一节，我们构造的二进制程序是一个空程序，其原因是 Rust 编译器找不到执行环境的入口函数，于是就没有生产后续的代码。所以，我们首先要把入口函数
 找到。通过查找资料，发现Rust编译器要找的入口函数是 <code class="docutils literal notranslate"><span class="pre">_start()</span></code> ，于是我们可以在 <code class="docutils literal notranslate"><span class="pre">main.rs</span></code> 中添加如下内容：</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="c1">// os/src/main.rs</span>
@@ -294,9 +300,11 @@ commentsRunWhenDOMLoaded(addUtterances);
 <span class="go">     11122: 01 a0            j       0 &lt;_start+0x2&gt;</span>
 </pre></div>
 </div>
-<p>通过 <code class="docutils literal notranslate"><span class="pre">file</span></code> 工具对二进制程序 <code class="docutils literal notranslate"><span class="pre">os</span></code> 的分析可以看到它依然是一个合法的 RV64 执行程序，但通过 <code class="docutils literal notranslate"><span class="pre">rust-readobj</span></code> 工具进一步分析，发现它的入口地址 Entry 是 <code class="docutils literal notranslate"><span class="pre">0x11120</span></code> ，这好像是一个合法的地址。再通过 <code class="docutils literal notranslate"><span class="pre">rust-objdump</span></code> 工具把它反汇编，可以看到生成汇编代码！</p>
-<p>所以，我们可以断定，这个二进制程序虽然合法，但它是一个空程序。这不是我们希望的，我们希望有具体内容的执行程序。为什么会这样呢？</p>
-<p>仔细读读这两条指令，发现就是一个死循环的汇编代码，且其第一条指令的地址与入口地址 Entry 的值一致。这已经是一个合理的程序了。如果我们用 <code class="docutils literal notranslate"><span class="pre">qemu-riscv64</span> <span class="pre">target/riscv64gc-unknown-none-elf/debug/os</span></code> 执行这个程序，可以看到好像就是在执行死循环。</p>
+<p>通过 <code class="docutils literal notranslate"><span class="pre">file</span></code> 工具对二进制程序 <code class="docutils literal notranslate"><span class="pre">os</span></code> 的分析可以看到它依然是一个合法的 RV64 执行程序，但通过 <code class="docutils literal notranslate"><span class="pre">rust-readobj</span></code> 工具进一步分析，发现它的入口地址 Entry 是 <code class="docutils literal notranslate"><span class="pre">0x11120</span></code> ，这好像是一个合法的地址。再通过 <code class="docutils literal notranslate"><span class="pre">rust-objdump</span></code> 工具把它反汇编，可以看到编译器生成的汇编代码！</p>
+<p>仔细读读这两条指令，发现就是一个死循环的汇编代码，且其第一条指令的地址与入口地址 Entry 的值一致，这说明编译器生成的目标执行程序已经是一个合理的程序了。如果我们用 <code class="docutils literal notranslate"><span class="pre">qemu-riscv64</span> <span class="pre">target/riscv64gc-unknown-none-elf/debug/os</span></code> 执行这个程序，可以看到好像就是在执行死循环。</p>
+</div>
+<div class="section" id="id6">
+<h3>程序正常退出<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
 <p>我们能让程序正常退出吗？我们把 <code class="docutils literal notranslate"><span class="pre">_start()</span></code> 函数中的循环语句注释掉，重新编译并分析，看到其汇编代码是：</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>rust-objdump -S target/riscv64gc-unknown-none-elf/debug/os
 
@@ -363,15 +371,16 @@ commentsRunWhenDOMLoaded(addUtterances);
 </div>
 <p>可以看到，返回的结果确实是 <code class="docutils literal notranslate"><span class="pre">9</span></code> 。这样，我们在没有任何显示功能的情况下，勉强完成了一个简陋的用户态最小化执行环境。</p>
 <p>上面实现的最小化执行环境貌似能够在 Linux 操作系统上支持只调用一个 <code class="docutils literal notranslate"><span class="pre">SYSCALL_EXIT</span></code> 系统调用服务的程序，但这也说明了
-在操作系统的支持下，实现一个基本的用户态执行环境还是比较容易的。其中的原因是，操作系统帮助用户态执行环境完成了程序加载、程序退出、资源分配、资源回收等各种琐事。如果没有操作系统，那么实现一个支持在裸机上运行应用程序的执行环境，就要考虑更多的事情了，或者干脆简化一切可以不必干的事情（比如对于单个应用，不需要调度功能等）。</p>
-<p>在裸机上的执行环境，其实就是之前提到的“三叶虫”操作系统。</p>
+在操作系统的支持下，实现一个基本的用户态执行环境还是比较容易的。其中的原因是，操作系统帮助用户态执行环境完成了程序加载、程序退出、资源分配、资源回收等各种琐事。如果没有操作系统，那么实现一个支持在裸机上运行应用程序的执行环境，就要考虑更多的事情了，或者干脆简化一切可以不必干的事情（比如对于单个应用，不需要调度功能等）。
+能在裸机上运行的执行环境，其实就是之前提到的“三叶虫”操作系统。</p>
 </div>
-<div class="section" id="id4">
-<h2>有显示支持的用户态执行环境<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
-<p>没有显示功能，终究觉得缺了点啥。在没有通常开发应用程序时常用的动态调试工具的情况下，其实能显示字符串，就已经能够满足绝大多数情况下的调试需求了。</p>
+</div>
+<div class="section" id="id7">
+<h2>有显示支持的用户态执行环境<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<p>没有显示功能，终究觉得缺了点啥。在没有通常开发应用程序时常用的动态调试工具的情况下，其实能显示字符串，就已经能够满足绝大多数情况下的操作系统调试需求了。</p>
 <p>Rust 的 core 库内建了以一系列帮助实现显示字符的基本 Trait 和数据结构，函数等，我们可以对其中的关键部分进行扩展，就可以实现定制的 <code class="docutils literal notranslate"><span class="pre">println!</span></code> 功能。</p>
-<div class="section" id="id5">
-<h3>实现输出字符串的相关函数<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id8">
+<h3>实现输出字符串的相关函数<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
 <p>首先封装一下对 <code class="docutils literal notranslate"><span class="pre">SYSCALL_WRITE</span></code> 系统调用。这个是 Linux 操作系统内核提供的系统调用，其 <code class="docutils literal notranslate"><span class="pre">ID</span></code> 就是 <code class="docutils literal notranslate"><span class="pre">SYSCALL_WRITE</span></code>。</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">SYSCALL_WRITE</span>: <span class="kt">usize</span> <span class="o">=</span><span class="w"> </span><span class="mi">64</span><span class="p">;</span><span class="w"></span>
 
@@ -431,7 +440,12 @@ commentsRunWhenDOMLoaded(addUtterances);
 <span class="go">  9</span>
 </pre></div>
 </div>
-<span class="target" id="start"></span></div>
+<span class="target" id="start"></span><dl class="footnote brackets">
+<dt class="label" id="shrimp"><span class="brackets"><a class="fn-backref" href="#id3">1</a></span></dt>
+<dd><p>恐龙虾是一类有三只眼的小型甲壳生物，最早出现在三亿年前的古生代石炭纪，在经历了三次地球世纪大灭绝之后，至今仍广泛地分布于世界各地。</p>
+</dd>
+</dl>
+</div>
 </div>
 </div>
 

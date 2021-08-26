@@ -129,7 +129,7 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li class="toctree-l1 current"><a class="current reference internal" href="#">第零章：操作系统概述</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="0intro.html">为何要写这本操作系统书</a></li>
 <li class="toctree-l2"><a class="reference internal" href="1what-is-os.html">什么是操作系统</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2os-interface.html">操作系统的接口</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2os-interface.html">操作系统的系统调用接口</a></li>
 <li class="toctree-l2"><a class="reference internal" href="3os-hw-abstract.html">操作系统抽象</a></li>
 <li class="toctree-l2"><a class="reference internal" href="4os-features.html">操作系统的特征</a></li>
 <li class="toctree-l2"><a class="reference internal" href="5setup-devel-env.html">实验环境配置</a></li>
@@ -244,18 +244,15 @@ commentsRunWhenDOMLoaded(addUtterances);
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="2os-interface.html">操作系统的接口</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2os-interface.html">操作系统的系统调用接口</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3os-hw-abstract.html">操作系统抽象</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="3os-hw-abstract.html#id2">执行环境</a></li>
-<li class="toctree-l2"><a class="reference internal" href="3os-hw-abstract.html#term-ccf">普通控制流</a></li>
-<li class="toctree-l2"><a class="reference internal" href="3os-hw-abstract.html#term-ecf">异常控制流</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="3os-hw-abstract.html#term-ees">上下文或执行环境的状态</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="3os-hw-abstract.html#term-execution-flow">执行流或执行历史</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="3os-hw-abstract.html#id7">中断</a></li>
-<li class="toctree-l3"><a class="reference internal" href="3os-hw-abstract.html#id8">异常</a></li>
-<li class="toctree-l3"><a class="reference internal" href="3os-hw-abstract.html#id9">陷入</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3os-hw-abstract.html#id2">执行环境</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="3os-hw-abstract.html#term-ccf">普通控制流</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3os-hw-abstract.html#term-ecf">异常控制流</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3os-hw-abstract.html#term-ees">控制流上下文（执行环境的状态）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3os-hw-abstract.html#id7">异常控制流：中断</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3os-hw-abstract.html#id8">异常控制流：异常</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3os-hw-abstract.html#id9">异常控制流：陷入</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="3os-hw-abstract.html#term-process">进程</a></li>
